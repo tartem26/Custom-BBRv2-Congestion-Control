@@ -4,7 +4,7 @@ A custom implementation of a **BBRv2/Tahoe–Reno** hybrid User Datagram Protoco
 ## Features
 - **Packet I/O over UDP** with fixed packet/sequence framing and timeouts.
 - **Memory-mapped file reader** for efficient chunking.
-- **Metrics:** throughput, avg delay, jitter, and a composite performance metric with a ready-to-print summary.
+- **Metrics:** throughput, average delay, jitter, and a composite performance metric with a ready-to-print summary.
 
 ## Algorithms Implemented
 - **Stop-and-Wait** and **Fixed Sliding Window** senders.
@@ -16,7 +16,7 @@ A custom implementation of a **BBRv2/Tahoe–Reno** hybrid User Datagram Protoco
   - On timeout, Tahoe-style reset.
 
 ## Repository Layout
-- `receiver.py`: UDP receiver that reassembles data and ACKs next expected byte; writes output after completion.
+- `receiver.py`: UDP receiver that reassembles data and ACKs the next expected byte; writes output after completion.
 - `utils.py`: Packet format, UDP socket wrapper, FileReader, metrics, and TahoeRenoSender.
 - `sender_stop_and_wait.py`, `sender_fixed_sliding_window.py`: Simple senders.
 - `sender_tahoe.py`, `sender_reno.py`, `sender_custom.py`: Thin launchers for TahoeRenoSender (types 'T', 'R', 'C').
@@ -58,7 +58,7 @@ Four-state, Mealy-type FSM (`STARTUP`, `DRAIN`, `PROBE_BW`, `PROBE_RTT`) with ba
      - `BDP = bw_estimate * minRTT`
      - `cwnd = clamp(BDP * cwnd_gain, cwnd_min, cwnd_max)`
 - **`STARTUP` → `DRAIN`:** exponential growth to find pipe, then drain in-flight to match `BDP`.
-- **`PROBE_BW`:** paced gain cycling to test for more bandwidth and keeps `cwnd` near `BDP` with gentle probing.
+- **`PROBE_BW`:** paced gain cycling to test for more bandwidth and keep `cwnd` near `BDP` with gentle probing.
 - **`PROBE_RTT`:** temporarily caps `cwnd` to a small value, re-measures `minRTT`, then returns to `PROBE_BW`.
 - **Loss & ACK signals (hybrid):**
      - **Triple dup-ACK (fast retransmit):**
