@@ -83,7 +83,8 @@ python sender_custom.py         # or construct with sender type 'C'
 Probe gains (↑/↓ cycle), `minRTT` refresh interval, dup-ACK threshold (3), timeout/backoff constants, and `cwnd` clamps.
 
 ### Result
-Top-3 / ~250 entrants on the `5.07` MB transfer task; earned automatic A in the course and a final-exam waiver.
+- Top-3 / ~250 entrants on the `5.07` MB transfer task.
+- Earned an automatic A course grade and a final-exam waiver in the Computer Networks (ECS 152A) class at the University of California, Davis.
 
 ## Measuring Performance
 After a run, metrics print to stdout: Throughput (bytes/s), Average Delay, Average Jitter, and a composite metric.
